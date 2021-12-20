@@ -2,10 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <Version>1.0.1</Version>
+    <Version>2.0.0</Version>
     <Authors>Thanh Duc Nguyen</Authors>
     <Company>HomeMade</Company>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Description>The library for counting words from srt files. It also supports checking whether a word already exists in database or not.</Description>
   </PropertyGroup>
 
 </Project>
