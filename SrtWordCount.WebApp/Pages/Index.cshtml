@@ -1,0 +1,18 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Upload srt files</h1>
+    <div class="mt-5">
+        <form method="post" enctype="multipart/form-data">
+            <label asp-for="@Model.FileUploads"></label>
+            <input asp-for="@Model.FileUploads" />
+            <span asp-validation-formaction="@Model.FileUploads"></span>
+
+            <button class="btn btn-success" asp-page="Index">Upload</button>
+        </form>
+    </div>
+</div>

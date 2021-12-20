@@ -1,0 +1,33 @@
+﻿@page "{statisticsId:int}"
+@model SrtWordCount.WebApp.Pages.Statistics.DetailModel
+@{
+    ViewData["Title"] = "Statistics of " + Model.SrtStatistics.MovieName;
+}
+
+<h2>@Model.SrtStatistics.MovieName</h2>
+<div>
+    Id: @Model.SrtStatistics.Id
+</div>
+<div>
+    Genre: @Model.SrtStatistics.Genre
+</div>
+<h6>
+    Table of Word counts
+</h6>
+
+<table class="table mt-2">
+    @foreach (var item in Model.SrtStatistics.DistinctWordCountList)
+    {
+        <tr>
+            <td>@item.Word</td>
+            <td>@item.Count</td>
+        </tr>
+    }
+</table>
+
+@if (Model.Message != null)
+{
+    <div class="alert alert-info">@Model.Message</div>
+}
+
+<a class="btn btn-outline-primary" asp-page="./List">Back to List</a>

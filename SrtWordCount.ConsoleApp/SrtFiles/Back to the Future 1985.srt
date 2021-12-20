@@ -6559,5 +6559,3 @@ have enough road to get up to 88.
 01:51:25,000 --> 01:51:29,166
 Roads? Where we're going,
 we don't need roads.
-
-

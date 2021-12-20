@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 
 namespace SrtWordCount.ConsoleApp
 {
@@ -10,36 +9,13 @@ namespace SrtWordCount.ConsoleApp
         {
             ISrtWordCountService _srtWordCountService = new SrtWordCountService();
 
-            var theBossBaby = _srtWordCountService.GetSrtStatisticsOneFile($"{Environment.CurrentDirectory}\\SrtFiles\\The Boss Baby 2017.srt");
-            Console.WriteLine($"{theBossBaby.FileName} has {theBossBaby.DistinctWordCountList.Count} words.");
-            Console.WriteLine("===================================");
+            var path = $"{Environment.CurrentDirectory}\\SrtFiles\\The Boss Baby 2017.srt";
+            string text = File.ReadAllText(path);
+            var movieName = Path.GetFileName(path).Replace(".srt", "");
 
-            var filePaths = Directory.GetFiles("SrtFiles", "*.srt");
-            var data = _srtWordCountService.GetSrtStatisticsMultiFiles(filePaths);
-            foreach (var item in data)
-            {
-                Console.WriteLine($"{item.FileName} has {item.DistinctWordCountList.Count} words.");
-            }
-            Console.WriteLine("===================================");
+            var data = _srtWordCountService.AnalyzeSrtStatistics(movieName, text);
 
-            var total = _srtWordCountService.GetDistinctWordsMultiFiles(filePaths);
-            Console.WriteLine("Total words exsisting in all movies: {0}", total.Count());
-
-            Console.WriteLine("===================================");
-            var wordsAcross = _srtWordCountService.GetDistinctWordsExistAcrossMultiFiles(filePaths);
-            Console.WriteLine("Total words exsisting across in all movies: {0}", wordsAcross.Count());
-
-            Console.WriteLine("===================================");
-            var word = "you";
-            var result = _srtWordCountService.IsWordExistInMultiFiles(word, filePaths);
-            if (result)
-            {
-                Console.WriteLine($"The word \"{word}\" exists.");
-            }
-            else
-            {
-                Console.WriteLine($"The word \"{word}\" does not exist.");
-            }
+            Console.WriteLine($"{data.MovieName} is a { data.Genre} movie which has {data.DistinctWordCountList.Count} words.");
         }
     }
 }
