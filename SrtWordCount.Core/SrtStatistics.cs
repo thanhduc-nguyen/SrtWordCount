@@ -1,21 +1,13 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
-namespace SrtWordCount
+namespace SrtWordCount.Core
 {
     public class SrtStatistics
     {
         /// <summary>
-        /// The identity of a srt.
+        /// The file name of a srt (movie title).
         /// </summary>
-        public int Id { get; set; }
-
-        /// <summary>
-        /// The file name of a srt (movie name).
-        /// </summary>
-        [Required, StringLength(100)]
-        [Display(Name = "Movie name")]
-        public string MovieName { get; set; }
+        public string MovieTitle { get; set; }
 
         /// <summary>
         /// The genre of a movie.
@@ -25,11 +17,11 @@ namespace SrtWordCount
         /// <summary>
         /// The list of words in a movie (srt file).
         /// </summary>
-        public List<string> Words { get; set; } = new List<string>();
+        public List<string> WordList { get; set; }
 
         /// <summary>
         /// The list of distinct words and their quantity in a movie (srt file).
         /// </summary>
-        public List<WordCount> DistinctWordCountList { get; set; } = new List<WordCount>();
+        public List<KeyValuePair<string, int>> DistinctWordCountList { get; set; }
     }
 }

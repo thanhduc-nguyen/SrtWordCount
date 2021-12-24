@@ -4,18 +4,18 @@
     ViewData["Title"] = "Edit";
 }
 
-<h2>@Model.SrtStatistics.MovieName</h2>
+<h2>@Model.SrtStatisticsViewModel.MovieTitle</h2>
 
 <form method="post">
-    <input type="hidden" asp-for="SrtStatistics.Id" />
+    <input type="hidden" asp-for="SrtStatisticsViewModel.Id" />
     <div class="form-group">
-        <label asp-for="SrtStatistics.MovieName"></label>
-        <input class="form-control" asp-for="SrtStatistics.MovieName" />
-        <span class="text-danger" asp-validation-for="SrtStatistics.MovieName"></span>
+        <label asp-for="SrtStatisticsViewModel.MovieTitle"></label>
+        <input class="form-control" asp-for="SrtStatisticsViewModel.MovieTitle" />
+        <span class="text-danger" asp-validation-for="SrtStatisticsViewModel.MovieTitle"></span>
     </div>
     <div class="form-group">
-        <label asp-for="SrtStatistics.Genre"></label>
-        <select class="form-control" asp-for="SrtStatistics.Genre" asp-items="Model.MovieGenres"></select>
+        <label asp-for="SrtStatisticsViewModel.Genre"></label>
+        <select class="form-control" asp-for="SrtStatisticsViewModel.Genre" asp-items="Model.MovieGenres"></select>
     </div>
     <button type="submit" class="btn btn-primary">Save</button>
     <a class="btn btn-outline-primary" asp-page="./List">Back to List</a>

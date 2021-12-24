@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SrtWordCount.Data;
+using SrtWordCount.Data.Models;
 
 namespace SrtWordCount.WebApp.Pages.Statistics
 {
@@ -10,7 +11,7 @@ namespace SrtWordCount.WebApp.Pages.Statistics
 
         [TempData]
         public string Message { get; set; }
-        public SrtStatistics SrtStatistics { get; set; }
+        public SrtStatisticsViewModel SrtStatisticsViewModel { get; set; }
 
         public DetailModel(ISrtStatisticsData srtStatisticsData)
         {
@@ -19,8 +20,9 @@ namespace SrtWordCount.WebApp.Pages.Statistics
 
         public IActionResult OnGet(int statisticsId)
         {
-            SrtStatistics = _srtStatisticsData.GetSrtStatisticsById(statisticsId);
-            if (SrtStatistics == null)
+            var model = _srtStatisticsData.GetSrtStatisticsById(statisticsId);
+            SrtStatisticsViewModel = model.ConvertToSrtStatisticsViewModel();
+            if (SrtStatisticsViewModel == null)
             {
                 return RedirectToPage("./NotFound");
             }

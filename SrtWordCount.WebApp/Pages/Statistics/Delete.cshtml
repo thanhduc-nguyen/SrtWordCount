@@ -1,0 +1,14 @@
+﻿@page "{statisticsId}"
+@model SrtWordCount.WebApp.Pages.Statistics.DeleteModel
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+<div class="alert alert-danger">
+    Are you sure to delete @Model.SrtStatisticsViewModel
+</div>
+<form method="post">
+    <button type="submit" class="btn btn-danger">Yes</button>
+    <a asp-page="List" class="btn btn-primary">Cancel</a>
+</form>

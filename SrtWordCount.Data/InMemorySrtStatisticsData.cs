@@ -1,46 +1,38 @@
-﻿using System.Collections.Generic;
+﻿using SrtWordCount.Core;
+using SrtWordCount.Data.Models;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace SrtWordCount.Data
 {
     public class InMemorySrtStatisticsData : ISrtStatisticsData
     {
-        List<SrtStatistics> srtStatisticsList;
+        List<SrtStatisticsModel> srtStatisticsList;
 
         public InMemorySrtStatisticsData()
         {
-            srtStatisticsList = new List<SrtStatistics>
+            srtStatisticsList = new List<SrtStatisticsModel>
             {
-                new SrtStatistics
+                new SrtStatisticsModel
                 {
                     Id = 1,
-                    MovieName = "The Boss Baby 2017",
+                    MovieTitle = "The Boss Baby 2017",
                     Genre = MovieGenre.Children,
-                    Words = new List<string> { "the","you","I" },
-                    DistinctWordCountList = new List<WordCount>
-                    {
-                        new WordCount { Word = "the", Count = 200 },
-                        new WordCount { Word = "you", Count = 150 },
-                        new WordCount { Word = "I", Count = 100 }
-                    }
+                    Words = "the,you,I",
+                    DistinctWordCounts = "[{\"Key\":\"you\",\"Value\":200},{\"Key\":\"i\",\"Value\":100},{\"Key\":\"to\",\"Value\":100}]"
                 },
-                new SrtStatistics
+                new SrtStatisticsModel
                 {
                     Id = 2,
-                    MovieName = "Hitch 2005",
+                    MovieTitle = "Hitch 2005",
                     Genre = MovieGenre.Drama,
-                    Words = new List<string> { "the","you","I" },
-                    DistinctWordCountList = new List<WordCount>
-                    {
-                        new WordCount { Word = "the", Count = 222 },
-                        new WordCount { Word = "she", Count = 150 },
-                        new WordCount { Word = "he", Count = 120 }
-                    }
+                    Words = "the,she,he",
+                    DistinctWordCounts = "[{\"Key\":\"the\",\"Value\":250},{\"Key\":\"she\",\"Value\":150},{\"Key\":\"he\",\"Value\":150}]"
                 }
             };
         }
 
-        public IEnumerable<SrtStatistics> GetAllSrtStatisticsByName(string name)
+        public IEnumerable<SrtStatisticsModel> GetAllSrtStatisticsByName(string name)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -48,37 +40,54 @@ namespace SrtWordCount.Data
             }
             else
             {
-                return srtStatisticsList.Where(x => x.MovieName.ToLower().Contains(name.ToLower()));
+                return srtStatisticsList.Where(x => x.MovieTitle.ToLower().Contains(name.ToLower()));
             }
         }
 
-        public SrtStatistics GetSrtStatisticsById(int id)
+        public SrtStatisticsModel GetSrtStatisticsById(int id)
         {
             return srtStatisticsList.SingleOrDefault(x => x.Id == id);
         }
 
-        public SrtStatistics Update(SrtStatistics updatedSrtStatistics)
+        public SrtStatisticsModel Add(SrtStatisticsModel newSrtStatistics)
+        {
+            srtStatisticsList.Add(newSrtStatistics);
+            newSrtStatistics.Id = srtStatisticsList.Max(x => x.Id) + 1;
+
+            return newSrtStatistics;
+        }
+
+        public SrtStatisticsModel Update(SrtStatisticsModel updatedSrtStatistics)
         {
             var statistics = srtStatisticsList.SingleOrDefault(x => x.Id == updatedSrtStatistics.Id);
             if (statistics != null)
             {
-                statistics.MovieName = updatedSrtStatistics.MovieName;
+                statistics.MovieTitle = updatedSrtStatistics.MovieTitle;
                 statistics.Genre = updatedSrtStatistics.Genre;
             }
 
             return statistics;
         }
 
+        public SrtStatisticsModel Delete(int id)
+        {
+            var srtStatistics = srtStatisticsList.FirstOrDefault(x => x.Id == id);
+            if (srtStatistics != null)
+            {
+                srtStatisticsList.Remove(srtStatistics);
+            }
+
+            return srtStatistics;
+        }
+
+        public int GetCountOfSrts()
+        {
+            return srtStatisticsList.Count;
+        }
+
         public int Commit()
         {
             return 0;
-        }
-
-        public SrtStatistics Add(SrtStatistics newSrtStatistics)
-        {
-            srtStatisticsList.Add(newSrtStatistics);
-            newSrtStatistics.Id = srtStatisticsList.Max(x => x.Id) + 1;
-            return newSrtStatistics;
         }
     }
 }

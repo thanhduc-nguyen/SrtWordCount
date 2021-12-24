@@ -3,24 +3,38 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SrtWordCount.Core;
 using SrtWordCount.Data;
+using System.IO;
 
 namespace SrtWordCount.WebApp
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly IConfiguration _configuration;
+        private readonly IWebHostEnvironment _webHostingEnvironment;
+
+        public Startup(IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
         {
-            Configuration = configuration;
+            _configuration = configuration;
+            _webHostingEnvironment = webHostEnvironment;
         }
 
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var dbPath = Path.Combine(_webHostingEnvironment.ContentRootPath, "App_Data\\SrtWordCount.mdf");
+            var connectionString = $"Data Source=(localdb)\\MSSQLLocalDB;AttachDbFilename={dbPath};Initial Catalog=SrtWordCount;Integrated Security=True;";
+            //services.AddDbContextPool<SrtWordCountDbContext>(options =>
+            //{
+            //    options.UseSqlServer(connectionString);
+            //});
             services.AddSingleton<ISrtWordCountService, SrtWordCountService>();
-            services.AddSingleton<ISrtStatisticsData, InMemorySrtStatisticsData>();
+
+            services.AddSingleton<ISrtStatisticsData, InMemorySrtStatisticsData>(); // same for all requests
+            //services.AddScoped<ISrtStatisticsData, SqlSrtStatisticsData>(); // different per request
+
             services.AddRazorPages();
         }
 

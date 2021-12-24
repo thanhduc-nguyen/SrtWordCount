@@ -22,7 +22,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Statistics/List">Movie statistics</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Statistics/List">Srt list</a>
                         </li>
                     </ul>
                 </div>
@@ -33,6 +33,7 @@
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
+        <vc:srt-count></vc:srt-count>
     </div>
 
     <footer class="border-top footer text-muted">

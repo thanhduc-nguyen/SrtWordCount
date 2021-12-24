@@ -1,4 +1,4 @@
-﻿namespace SrtWordCount
+﻿namespace SrtWordCount.Core
 {
     public interface ISrtWordCountService
     {

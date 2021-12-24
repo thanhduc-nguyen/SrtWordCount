@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace SrtWordCount
+namespace SrtWordCount.Core
 {
     public class SrtWordCountService : ISrtWordCountService
     {
@@ -13,7 +13,7 @@ namespace SrtWordCount
 
             string[] allLinesInSrt = Regex.Split(text, @"(?:\r?\n)*\d+\r?\n\d{2}:\d{2}:\d{2},\d{3} --> \d{2}:\d{2}:\d{2},\d{3}\r?\n");
 
-            srtStatistics.MovieName = fileName;
+            srtStatistics.MovieTitle = fileName;
 
             foreach (var item in allLinesInSrt)
             {
@@ -23,19 +23,16 @@ namespace SrtWordCount
                 allWordsInSrt.AddRange(wordsInSrtLine.Select(x => x.ToLower()));
             }
 
+            srtStatistics.DistinctWordCountList = new List<KeyValuePair<string, int>>();
+
             foreach (var line in allWordsInSrt.GroupBy(info => info)
-                           .Select(group => new WordCount
-                           {
-                               Word = group.Key,
-                               Count = group.Count()
-                           })
-                           .OrderByDescending(x => x.Count))
+                           .Select(group => new KeyValuePair<string, int>(group.Key, group.Count()))
+                           .OrderByDescending(x => x.Value))
             {
                 srtStatistics.DistinctWordCountList.Add(line);
             }
 
-            srtStatistics.Words = allWordsInSrt;
-
+            srtStatistics.WordList = allWordsInSrt;
             return srtStatistics;
         }
     }

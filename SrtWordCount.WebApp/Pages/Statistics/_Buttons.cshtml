@@ -1,0 +1,6 @@
+﻿@using SrtWordCount.Data.Models
+@model SrtStatisticsViewModel
+
+<a class="btn btn-outline-primary" asp-page="./Detail" asp-route-statisticsId="@Model.Id">View</a>
+<a class="btn btn-outline-success" asp-page="./Edit" asp-route-statisticsId="@Model.Id">Edit</a>
+<a class="btn btn-outline-danger" asp-page="./Delete" asp-route-statisticsId="@Model.Id">Delete</a>

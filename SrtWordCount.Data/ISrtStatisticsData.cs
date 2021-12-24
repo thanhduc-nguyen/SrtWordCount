@@ -1,13 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using SrtWordCount.Data.Models;
+using System.Collections.Generic;
 
 namespace SrtWordCount.Data
 {
     public interface ISrtStatisticsData
     {
-        IEnumerable<SrtStatistics> GetAllSrtStatisticsByName(string name);
-        SrtStatistics GetSrtStatisticsById(int id);
-        SrtStatistics Update(SrtStatistics updatedSrtStatistics);
-        SrtStatistics Add(SrtStatistics newSrtStatistics);
+        IEnumerable<SrtStatisticsModel> GetAllSrtStatisticsByName(string name);
+        SrtStatisticsModel GetSrtStatisticsById(int id);
+        SrtStatisticsModel Add(SrtStatisticsModel newSrtStatistics);
+        SrtStatisticsModel Update(SrtStatisticsModel updatedSrtStatistics);
+        SrtStatisticsModel Delete(int id);
+        int GetCountOfSrts();
         int Commit();
     }
 }

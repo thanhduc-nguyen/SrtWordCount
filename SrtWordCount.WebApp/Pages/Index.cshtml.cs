@@ -2,10 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using SrtWordCount.Core;
+using SrtWordCount.Data;
+using SrtWordCount.Data.Models;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Text;
-using System.Threading.Tasks;
+using System.Text.Json;
 
 namespace SrtWordCount.WebApp.Pages
 {
@@ -13,27 +16,29 @@ namespace SrtWordCount.WebApp.Pages
     {
         private readonly ILogger<IndexModel> _logger;
         private readonly ISrtWordCountService _srtWordCountService;
+        private readonly ISrtStatisticsData _srtStatisticsData;
 
         [Required(ErrorMessage = "Cannot upload files.")]
         [DataType(DataType.Upload)]
-        [FileExtensions(Extensions = "srt")]
+        [FileExtensions(Extensions = ".srt")]
         [Display(Name = "Select files to upload")]
         [BindProperty]
         public IFormFile[] FileUploads { get; set; }
 
-        public IndexModel(ILogger<IndexModel> logger, ISrtWordCountService srtWordCountService)
+        public IndexModel(ILogger<IndexModel> logger, ISrtWordCountService srtWordCountService, ISrtStatisticsData srtStatisticsData)
         {
             _logger = logger;
             _srtWordCountService = srtWordCountService;
+            _srtStatisticsData = srtStatisticsData;
         }
 
         public void OnGet()
         {
         }
 
-        public async Task OnPostAsync()
+        public IActionResult OnPostAsync()
         {
-            if (ModelState.IsValid)
+            if (FileUploads != null)
             {
                 foreach (var file in FileUploads)
                 {
@@ -48,8 +53,20 @@ namespace SrtWordCount.WebApp.Pages
 
                     string text = result.ToString();
                     var srtStatistics = _srtWordCountService.AnalyzeSrtStatistics(file.FileName, text);
+                    var srtStatisticsModel = new SrtStatisticsModel
+                    {
+                        Id = 0,
+                        MovieTitle = file.FileName,
+                        Genre = MovieGenre.None,
+                        Words = string.Join<string>(",", srtStatistics.WordList),
+                        DistinctWordCounts = JsonSerializer.Serialize(srtStatistics.DistinctWordCountList)
+                    };
+                    _srtStatisticsData.Add(srtStatisticsModel);
+                    _srtStatisticsData.Commit();
                 }
             }
+
+            return RedirectToPage("./Statistics/List");
         }
     }
 }

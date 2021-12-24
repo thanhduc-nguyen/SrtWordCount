@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SrtWordCount.Data;
+using SrtWordCount.Data.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SrtWordCount.WebApp.Pages.Statistics
 {
@@ -9,7 +11,7 @@ namespace SrtWordCount.WebApp.Pages.Statistics
     {
         private readonly ISrtStatisticsData _srtStatisticsData;
 
-        public IEnumerable<SrtStatistics> SrtStatisticsList { get; set; }
+        public IEnumerable<SrtStatisticsViewModel> SrtStatisticsViewModelList { get; set; }
 
         [BindProperty(SupportsGet = true)]
         public string SearchTerm { get; set; }
@@ -21,7 +23,8 @@ namespace SrtWordCount.WebApp.Pages.Statistics
 
         public void OnGet()
         {
-            SrtStatisticsList = _srtStatisticsData.GetAllSrtStatisticsByName(SearchTerm);
+            SrtStatisticsViewModelList = _srtStatisticsData.GetAllSrtStatisticsByName(SearchTerm)
+                .Select(x => x.ConvertToSrtStatisticsViewModel());
         }
     }
 }
