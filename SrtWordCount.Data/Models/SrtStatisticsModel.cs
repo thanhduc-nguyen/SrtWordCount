@@ -14,5 +14,7 @@ namespace SrtWordCount.Data.Models
         public MovieGenre Genre { get; set; }
         public string Words { get; set; }
         public string DistinctWordCounts { get; set; }
+        public int TotalWords { get; set; }
+        public int TotalDistictWordCounts { get; set; }
     }
 }

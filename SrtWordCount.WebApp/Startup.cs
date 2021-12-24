@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,14 +27,14 @@ namespace SrtWordCount.WebApp
         {
             var dbPath = Path.Combine(_webHostingEnvironment.ContentRootPath, "App_Data\\SrtWordCount.mdf");
             var connectionString = $"Data Source=(localdb)\\MSSQLLocalDB;AttachDbFilename={dbPath};Initial Catalog=SrtWordCount;Integrated Security=True;";
-            //services.AddDbContextPool<SrtWordCountDbContext>(options =>
-            //{
-            //    options.UseSqlServer(connectionString);
-            //});
+            services.AddDbContextPool<SrtWordCountDbContext>(options =>
+            {
+                options.UseSqlServer(connectionString);
+            });
             services.AddSingleton<ISrtWordCountService, SrtWordCountService>();
 
-            services.AddSingleton<ISrtStatisticsData, InMemorySrtStatisticsData>(); // same for all requests
-            //services.AddScoped<ISrtStatisticsData, SqlSrtStatisticsData>(); // different per request
+            //services.AddSingleton<ISrtStatisticsData, InMemorySrtStatisticsData>(); // same for all requests
+            services.AddScoped<ISrtStatisticsData, SqlSrtStatisticsData>(); // different per request
 
             services.AddRazorPages();
         }

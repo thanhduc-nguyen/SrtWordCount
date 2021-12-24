@@ -15,7 +15,9 @@ namespace SrtWordCount.Data
                 MovieTitle = model.MovieTitle,
                 Genre = model.Genre,
                 Words = model.Words.Split(",").ToList(),
-                DistinctWordCounts = JsonSerializer.Deserialize<List<KeyValuePair<string, int>>>(model.DistinctWordCounts)
+                DistinctWordCounts = JsonSerializer.Deserialize<List<KeyValuePair<string, int>>>(model.DistinctWordCounts),
+                TotalWords = model.TotalWords,
+                TotalDistictWordCounts = model.TotalDistictWordCounts
             };
         }
 
@@ -27,7 +29,9 @@ namespace SrtWordCount.Data
                 MovieTitle = model.MovieTitle,
                 Genre = model.Genre,
                 Words = string.Join(",", model.Words),
-                DistinctWordCounts = JsonSerializer.Serialize(model.DistinctWordCounts)
+                DistinctWordCounts = JsonSerializer.Serialize(model.DistinctWordCounts),
+                TotalWords = model.TotalWords,
+                TotalDistictWordCounts = model.TotalDistictWordCounts
             };
         }
     }

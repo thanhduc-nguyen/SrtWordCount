@@ -14,7 +14,7 @@ namespace SrtWordCount.WebApp.Pages.Statistics
         private readonly IHtmlHelper _htmlHelper;
 
         [BindProperty]
-        public SrtStatisticsViewModel SrtStatisticsViewModel { get; set; }
+        public SrtStatisticsModel SrtStatisticsModel { get; set; }
         public IEnumerable<SelectListItem> MovieGenres { get; set; }
 
         public EditModel(ISrtStatisticsData srtStatisticsData, IHtmlHelper htmlHelper)
@@ -28,14 +28,13 @@ namespace SrtWordCount.WebApp.Pages.Statistics
             MovieGenres = _htmlHelper.GetEnumSelectList<MovieGenre>();
             if (statisticsId.HasValue)
             {
-                SrtStatisticsViewModel = _srtStatisticsData.GetSrtStatisticsById(statisticsId.Value)
-                    .ConvertToSrtStatisticsViewModel();
+                SrtStatisticsModel = _srtStatisticsData.GetSrtStatisticsById(statisticsId.Value);
             }
             else
             {
-                SrtStatisticsViewModel = new SrtStatisticsViewModel();
+                SrtStatisticsModel = new SrtStatisticsModel();
             }
-            if (SrtStatisticsViewModel == null)
+            if (SrtStatisticsModel == null)
             {
                 return RedirectToPage("./NotFound");
             }
@@ -49,20 +48,20 @@ namespace SrtWordCount.WebApp.Pages.Statistics
             {
                 MovieGenres = _htmlHelper.GetEnumSelectList<MovieGenre>();
                 return Page();
-            }
+            }           
 
-            if (SrtStatisticsViewModel.Id > 0)
+            if (SrtStatisticsModel.Id > 0)
             {
-                _srtStatisticsData.Update(SrtStatisticsViewModel.ConvertToSrtStatisticsModel());
+                _srtStatisticsData.Update(SrtStatisticsModel);
             }
             else
             {
-                _srtStatisticsData.Add(SrtStatisticsViewModel.ConvertToSrtStatisticsModel());
+                _srtStatisticsData.Add(SrtStatisticsModel);
             }
             _srtStatisticsData.Commit();
             TempData["Message"] = "Statistics saved!";
 
-            return RedirectToPage("./Detail", new { statisticsId = SrtStatisticsViewModel.Id });
+            return RedirectToPage("./Detail", new { statisticsId = SrtStatisticsModel.Id });
         }
     }
 }

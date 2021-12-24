@@ -14,6 +14,23 @@ namespace SrtWordCount.Data
             _db = db;
         }
 
+        public IEnumerable<SrtStatisticsModel> GetAllSrtStatisticsByName(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                return _db.SrtStatisticsModelList;
+            }
+            else
+            {
+                return _db.SrtStatisticsModelList.Where(x => x.MovieTitle.ToLower().Contains(name.ToLower()));
+            }
+        }
+
+        public SrtStatisticsModel GetSrtStatisticsById(int id)
+        {
+            return _db.SrtStatisticsModelList.Find(id);
+        }
+
         public SrtStatisticsModel Add(SrtStatisticsModel newSrtStatistics)
         {
             _db.Add(newSrtStatistics);
@@ -21,9 +38,12 @@ namespace SrtWordCount.Data
             return newSrtStatistics;
         }
 
-        public int Commit()
+        public SrtStatisticsModel Update(SrtStatisticsModel updatedSrtStatistics)
         {
-            return _db.SaveChanges();
+            var statistics = _db.SrtStatisticsModelList.Attach(updatedSrtStatistics);
+            statistics.State = EntityState.Modified;
+
+            return updatedSrtStatistics;
         }
 
         public SrtStatisticsModel Delete(int id)
@@ -37,34 +57,14 @@ namespace SrtWordCount.Data
             return srtStatistics;
         }
 
-        public IEnumerable<SrtStatisticsModel> GetAllSrtStatisticsByName(string name)
-        {
-            if (string.IsNullOrEmpty(name))
-            {
-                return _db.SrtStatisticsModelList;
-            }
-            else
-            {
-                return _db.SrtStatisticsModelList.Where(x => x.MovieTitle.ToLower().Contains(name.ToLower()));
-            }
-        }
-
         public int GetCountOfSrts()
         {
             return _db.SrtStatisticsModelList.Count();
         }
 
-        public SrtStatisticsModel GetSrtStatisticsById(int id)
+        public int Commit()
         {
-            return _db.SrtStatisticsModelList.Find(id);
-        }
-
-        public SrtStatisticsModel Update(SrtStatisticsModel updatedSrtStatistics)
-        {
-            var statistics = _db.SrtStatisticsModelList.Attach(updatedSrtStatistics);
-            statistics.State = EntityState.Modified;
-
-            return updatedSrtStatistics;
+            return _db.SaveChanges();
         }
     }
 }

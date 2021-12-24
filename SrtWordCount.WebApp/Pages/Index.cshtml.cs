@@ -38,7 +38,7 @@ namespace SrtWordCount.WebApp.Pages
 
         public IActionResult OnPostAsync()
         {
-            if (FileUploads != null)
+            if (FileUploads.Length > 0)
             {
                 foreach (var file in FileUploads)
                 {
@@ -56,17 +56,23 @@ namespace SrtWordCount.WebApp.Pages
                     var srtStatisticsModel = new SrtStatisticsModel
                     {
                         Id = 0,
-                        MovieTitle = file.FileName,
+                        MovieTitle = srtStatistics.MovieTitle,
                         Genre = MovieGenre.None,
                         Words = string.Join<string>(",", srtStatistics.WordList),
-                        DistinctWordCounts = JsonSerializer.Serialize(srtStatistics.DistinctWordCountList)
+                        DistinctWordCounts = JsonSerializer.Serialize(srtStatistics.DistinctWordCountList),
+                        TotalWords = srtStatistics.WordList.Count,
+                        TotalDistictWordCounts = srtStatistics.DistinctWordCountList.Count
                     };
                     _srtStatisticsData.Add(srtStatisticsModel);
                     _srtStatisticsData.Commit();
                 }
-            }
 
-            return RedirectToPage("./Statistics/List");
+                return RedirectToPage("./Statistics/List");
+            }
+            else
+            {
+                return Page();
+            }
         }
     }
 }

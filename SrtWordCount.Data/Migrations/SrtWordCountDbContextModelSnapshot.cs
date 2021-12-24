@@ -36,6 +36,12 @@ namespace SrtWordCount.Data.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
+                    b.Property<int>("TotalDistictWordCounts")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalWords")
+                        .HasColumnType("int");
+
                     b.Property<string>("Words")
                         .HasColumnType("nvarchar(max)");
 

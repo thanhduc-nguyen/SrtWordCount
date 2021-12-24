@@ -19,7 +19,9 @@ namespace SrtWordCount.Data
                     MovieTitle = "The Boss Baby 2017",
                     Genre = MovieGenre.Children,
                     Words = "the,you,I",
-                    DistinctWordCounts = "[{\"Key\":\"you\",\"Value\":200},{\"Key\":\"i\",\"Value\":100},{\"Key\":\"to\",\"Value\":100}]"
+                    DistinctWordCounts = "[{\"Key\":\"you\",\"Value\":200},{\"Key\":\"i\",\"Value\":100},{\"Key\":\"to\",\"Value\":100}]",
+                    TotalWords = 400,
+                    TotalDistictWordCounts = 3
                 },
                 new SrtStatisticsModel
                 {
@@ -27,7 +29,9 @@ namespace SrtWordCount.Data
                     MovieTitle = "Hitch 2005",
                     Genre = MovieGenre.Drama,
                     Words = "the,she,he",
-                    DistinctWordCounts = "[{\"Key\":\"the\",\"Value\":250},{\"Key\":\"she\",\"Value\":150},{\"Key\":\"he\",\"Value\":150}]"
+                    DistinctWordCounts = "[{\"Key\":\"the\",\"Value\":250},{\"Key\":\"she\",\"Value\":150},{\"Key\":\"he\",\"Value\":150}]",
+                    TotalWords = 550,
+                    TotalDistictWordCounts = 3
                 }
             };
         }

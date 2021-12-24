@@ -4,18 +4,22 @@
     ViewData["Title"] = "Edit";
 }
 
-<h2>@Model.SrtStatisticsViewModel.MovieTitle</h2>
+<h2>@Model.SrtStatisticsModel.MovieTitle</h2>
 
 <form method="post">
-    <input type="hidden" asp-for="SrtStatisticsViewModel.Id" />
+    <input type="hidden" asp-for="SrtStatisticsModel.Id" />
+    <input type="hidden" asp-for="SrtStatisticsModel.Words" />
+    <input type="hidden" asp-for="SrtStatisticsModel.DistinctWordCounts" />
+    <input type="hidden" asp-for="SrtStatisticsModel.TotalWords" />
+    <input type="hidden" asp-for="SrtStatisticsModel.TotalDistictWordCounts" />
     <div class="form-group">
-        <label asp-for="SrtStatisticsViewModel.MovieTitle"></label>
-        <input class="form-control" asp-for="SrtStatisticsViewModel.MovieTitle" />
-        <span class="text-danger" asp-validation-for="SrtStatisticsViewModel.MovieTitle"></span>
+        <label asp-for="SrtStatisticsModel.MovieTitle"></label>
+        <input class="form-control" asp-for="SrtStatisticsModel.MovieTitle" />
+        <span class="text-danger" asp-validation-for="SrtStatisticsModel.MovieTitle"></span>
     </div>
     <div class="form-group">
-        <label asp-for="SrtStatisticsViewModel.Genre"></label>
-        <select class="form-control" asp-for="SrtStatisticsViewModel.Genre" asp-items="Model.MovieGenres"></select>
+        <label asp-for="SrtStatisticsModel.Genre"></label>
+        <select class="form-control" asp-for="SrtStatisticsModel.Genre" asp-items="Model.MovieGenres"></select>
     </div>
     <button type="submit" class="btn btn-primary">Save</button>
     <a class="btn btn-outline-primary" asp-page="./List">Back to List</a>

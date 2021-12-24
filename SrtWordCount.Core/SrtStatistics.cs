@@ -5,7 +5,7 @@ namespace SrtWordCount.Core
     public class SrtStatistics
     {
         /// <summary>
-        /// The file name of a srt (movie title).
+        /// The movie title.
         /// </summary>
         public string MovieTitle { get; set; }
 

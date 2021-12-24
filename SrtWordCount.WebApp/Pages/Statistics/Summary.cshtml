@@ -1,0 +1,19 @@
+﻿@page
+@model SrtWordCount.WebApp.Pages.SummaryModel
+@{
+    ViewData["Title"] = "Summary";
+}
+
+<h2>Summary</h2>
+
+<h5 class="mt-3">Total distinct words</h5>
+@foreach (var item in Model.SrtStatisticsViewModels)
+{
+    <div>@item.MovieTitle which is @item.Genre movie has @item.TotalDistictWordCounts words.</div>
+}
+
+<h5 class="mt-3">Total distinct words group by movie genre</h5>
+@foreach (var item in Model.TotalWordsGroupByGenre)
+{
+    <div>The @item.Key has @item.Value words.</div>
+}

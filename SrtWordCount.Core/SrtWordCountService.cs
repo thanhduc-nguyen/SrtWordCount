@@ -13,7 +13,7 @@ namespace SrtWordCount.Core
 
             string[] allLinesInSrt = Regex.Split(text, @"(?:\r?\n)*\d+\r?\n\d{2}:\d{2}:\d{2},\d{3} --> \d{2}:\d{2}:\d{2},\d{3}\r?\n");
 
-            srtStatistics.MovieTitle = fileName;
+            srtStatistics.MovieTitle = fileName.Replace(".srt", "");
 
             foreach (var item in allLinesInSrt)
             {
