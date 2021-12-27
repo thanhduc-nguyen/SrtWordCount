@@ -23,17 +23,35 @@ namespace SrtWordCount.Core
                 allWordsInSrt.AddRange(wordsInSrtLine.Select(x => x.ToLower()));
             }
 
-            srtStatistics.DistinctWordCountList = new List<KeyValuePair<string, int>>();
+            srtStatistics.DistinctWordCounts = new List<KeyValuePair<string, int>>();
 
             foreach (var line in allWordsInSrt.GroupBy(info => info)
                            .Select(group => new KeyValuePair<string, int>(group.Key, group.Count()))
                            .OrderByDescending(x => x.Value))
             {
-                srtStatistics.DistinctWordCountList.Add(line);
+                srtStatistics.DistinctWordCounts.Add(line);
             }
 
-            srtStatistics.WordList = allWordsInSrt;
+            srtStatistics.Words = allWordsInSrt;
             return srtStatistics;
+        }
+
+        public IEnumerable<KeyValuePair<string, int>> GetAllDistinctWordsByGenre(IEnumerable<SrtStatistics> srtStatisticsList, MovieGenre genre)
+        {
+            var data1 = srtStatisticsList.Where(x => x.Genre == genre).Select(x => x.Words);
+            var data2 = new List<string>();
+            var result = new List<KeyValuePair<string, int>>();
+            foreach (var item in data1)
+            {
+                data2.AddRange(item);
+            }
+            foreach (var line in data2.GroupBy(info => info)
+                           .Select(group => new KeyValuePair<string, int>(group.Key, group.Count()))
+                           .OrderByDescending(x => x.Value))
+            {
+                result.Add(line);
+            }
+            return result;
         }
     }
 }

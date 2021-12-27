@@ -17,11 +17,11 @@ namespace SrtWordCount.Core
         /// <summary>
         /// The list of words in a movie (srt file).
         /// </summary>
-        public List<string> WordList { get; set; }
+        public List<string> Words { get; set; }
 
         /// <summary>
         /// The list of distinct words and their quantity in a movie (srt file).
         /// </summary>
-        public List<KeyValuePair<string, int>> DistinctWordCountList { get; set; }
+        public List<KeyValuePair<string, int>> DistinctWordCounts { get; set; }
     }
 }

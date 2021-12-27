@@ -1,4 +1,5 @@
-﻿using SrtWordCount.Data.Models;
+﻿using SrtWordCount.Core;
+using SrtWordCount.Data.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
@@ -32,6 +33,17 @@ namespace SrtWordCount.Data
                 DistinctWordCounts = JsonSerializer.Serialize(model.DistinctWordCounts),
                 TotalWords = model.TotalWords,
                 TotalDistictWordCounts = model.TotalDistictWordCounts
+            };
+        }
+
+        public static SrtStatistics ConvertToSrtStatistics(this SrtStatisticsModel model)
+        {
+            return new SrtStatistics
+            {
+                MovieTitle = model.MovieTitle,
+                Genre = model.Genre,
+                Words = model.Words.Split(",").ToList(),
+                DistinctWordCounts = JsonSerializer.Deserialize<List<KeyValuePair<string, int>>>(model.DistinctWordCounts),
             };
         }
     }

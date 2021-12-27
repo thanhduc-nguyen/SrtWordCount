@@ -10,44 +10,29 @@ namespace SrtWordCount.WebApp.Pages
 {
     public class SummaryModel : PageModel
     {
+        private readonly ISrtWordCountService _srtWordCountService;
         private readonly ISrtStatisticsData _srtStatisticsData;
 
-        public IEnumerable<SrtStatisticsViewModel> SrtStatisticsViewModels { get; set; }
+        public IEnumerable<SrtStatisticsModel> SrtStatisticsModels { get; set; }
         public List<KeyValuePair<MovieGenre, int>> TotalWordsGroupByGenre { get; set; }
 
-        public SummaryModel(ISrtStatisticsData srtStatisticsData)
+        public SummaryModel(ISrtWordCountService srtWordCountService, ISrtStatisticsData srtStatisticsData)
         {
+            _srtWordCountService = srtWordCountService;
             _srtStatisticsData = srtStatisticsData;
         }
 
         public void OnGet()
         {
-            SrtStatisticsViewModels = _srtStatisticsData.GetAllSrtStatisticsByName(string.Empty)
-                .Select(x => x.ConvertToSrtStatisticsViewModel());
+            SrtStatisticsModels = _srtStatisticsData.GetAllSrtStatisticsByName();
 
             TotalWordsGroupByGenre = new List<KeyValuePair<MovieGenre, int>>();
             foreach (var genre in Enum.GetValues<MovieGenre>())
             {
-                TotalWordsGroupByGenre.Add(new KeyValuePair<MovieGenre, int>(genre, GetAllDistinctWordsByGenre(genre).Count()));
+                TotalWordsGroupByGenre.Add(new KeyValuePair<MovieGenre, int>(genre,
+                    _srtWordCountService.GetAllDistinctWordsByGenre(
+                        SrtStatisticsModels.Select(x => x.ConvertToSrtStatistics()), genre).Count()));
             }
-        }
-
-        private IEnumerable<KeyValuePair<string, int>> GetAllDistinctWordsByGenre(MovieGenre genre)
-        {
-            var data1 = SrtStatisticsViewModels.Where(x => x.Genre == genre).Select(x => x.Words);
-            var data2 = new List<string>();
-            var result = new List<KeyValuePair<string, int>>();
-            foreach (var item in data1)
-            {
-                data2.AddRange(item);
-            }
-            foreach (var line in data2.GroupBy(info => info)
-                           .Select(group => new KeyValuePair<string, int>(group.Key, group.Count()))
-                           .OrderByDescending(x => x.Value))
-            {
-                result.Add(line);
-            }
-            return result;
         }
     }
 }

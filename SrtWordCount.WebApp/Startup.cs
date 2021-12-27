@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -37,6 +38,7 @@ namespace SrtWordCount.WebApp
             services.AddScoped<ISrtStatisticsData, SqlSrtStatisticsData>(); // different per request
 
             services.AddRazorPages();
+            //services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +55,8 @@ namespace SrtWordCount.WebApp
                 app.UseHsts();
             }
 
+            app.Use(SayHelloMiddleware);
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -63,7 +67,23 @@ namespace SrtWordCount.WebApp
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                endpoints.MapControllers();
             });
+        }
+
+        private RequestDelegate SayHelloMiddleware(RequestDelegate next)
+        {
+            return async ctx =>
+            {
+                if (ctx.Request.Path.StartsWithSegments("/hello"))
+                {
+                    await ctx.Response.WriteAsync("Hello World!");
+                }
+                else
+                {
+                    await next(ctx);
+                }
+            };
         }
     }
 }

@@ -58,10 +58,10 @@ namespace SrtWordCount.WebApp.Pages
                         Id = 0,
                         MovieTitle = srtStatistics.MovieTitle,
                         Genre = MovieGenre.None,
-                        Words = string.Join<string>(",", srtStatistics.WordList),
-                        DistinctWordCounts = JsonSerializer.Serialize(srtStatistics.DistinctWordCountList),
-                        TotalWords = srtStatistics.WordList.Count,
-                        TotalDistictWordCounts = srtStatistics.DistinctWordCountList.Count
+                        Words = string.Join<string>(",", srtStatistics.Words),
+                        DistinctWordCounts = JsonSerializer.Serialize(srtStatistics.DistinctWordCounts),
+                        TotalWords = srtStatistics.Words.Count,
+                        TotalDistictWordCounts = srtStatistics.DistinctWordCounts.Count
                     };
                     _srtStatisticsData.Add(srtStatisticsModel);
                     _srtStatisticsData.Commit();
