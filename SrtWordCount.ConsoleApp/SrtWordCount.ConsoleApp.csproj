@@ -1,0 +1,150 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="SrtFiles\Annabelle 2017.srt" />
+    <None Remove="SrtFiles\Back to the Future 1985.srt" />
+    <None Remove="SrtFiles\Definitely Maybe 2008.srt" />
+    <None Remove="SrtFiles\High School Musical 2006.srt" />
+    <None Remove="SrtFiles\Hitch 2005.srt" />
+    <None Remove="SrtFiles\Interstellar 2014.srt" />
+    <None Remove="SrtFiles\Mean Girls 2004.srt" />
+    <None Remove="SrtFiles\Mission Impossible Fallout 2018.srt" />
+    <None Remove="SrtFiles\The Boss Baby 2017.srt" />
+    <None Remove="SrtFiles\The Lord of the Rings 2001.srt" />
+    <None Remove="SrtFiles\[Action] John Wick 2014.srt" />
+    <None Remove="SrtFiles\[Action] Mission Impossible Fallout 2018.srt" />
+    <None Remove="SrtFiles\[Action] Rush Hour 1998.srt" />
+    <None Remove="SrtFiles\[Action] The Expendables 2010.srt" />
+    <None Remove="SrtFiles\[Action] The Marksman 2021.srt" />
+    <None Remove="SrtFiles\[Action] The Matrix 1999.srt" />
+    <None Remove="SrtFiles\[Children] Despicable Me 2010.srt" />
+    <None Remove="SrtFiles\[Children] Minions 2015.srt" />
+    <None Remove="SrtFiles\[Children] Sing 2016.srt" />
+    <None Remove="SrtFiles\[Children] The Boss Baby 2017.srt" />
+    <None Remove="SrtFiles\[Children] The Grinch 2018.srt" />
+    <None Remove="SrtFiles\[Drama] 500 Days of Summer 2009.srt" />
+    <None Remove="SrtFiles\[Drama] Definitely Maybe 2008.srt" />
+    <None Remove="SrtFiles\[Drama] Hitch 2005.srt" />
+    <None Remove="SrtFiles\[Drama] La La Land 2016.srt" />
+    <None Remove="SrtFiles\[Drama] Me Before You 2016.srt" />
+    <None Remove="SrtFiles\[Fantasy] The Lord of the Rings 2001.srt" />
+    <None Remove="SrtFiles\[Horror] Annabelle 2017.srt" />
+    <None Remove="SrtFiles\[Horror] Ghost Ship 2002.srt" />
+    <None Remove="SrtFiles\[Horror] I Still See You 2018.srt" />
+    <None Remove="SrtFiles\[Horror] Rings 2017.srt" />
+    <None Remove="SrtFiles\[Horror] The Conjuring 2013.srt" />
+    <None Remove="SrtFiles\[SciFi] Aliens 1986.srt" />
+    <None Remove="SrtFiles\[SciFi] Back to the Future 1985.srt" />
+    <None Remove="SrtFiles\[SciFi] Interstellar 2014.srt" />
+    <None Remove="SrtFiles\[SciFi] Jurassic Park 1993.srt" />
+    <None Remove="SrtFiles\[SciFi] The Matrix 1999.srt" />
+    <None Remove="SrtFiles\[Teenagers] A Cinderella Story 2004.srt" />
+    <None Remove="SrtFiles\[Teenagers] High School Musical 2006.srt" />
+    <None Remove="SrtFiles\[Teenagers] Love Simon 2018.srt" />
+    <None Remove="SrtFiles\[Teenagers] Mean Girls 2004.srt" />
+    <None Remove="SrtFiles\[Teenagers] Raise Your Voice 2004.srt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="SrtFiles\[Action] John Wick 2014.srt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SrtFiles\[Action] Mission Impossible Fallout 2018.srt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SrtFiles\[Action] Rush Hour 1998.srt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SrtFiles\[Action] The Expendables 2010.srt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SrtFiles\[Action] The Marksman 2021.srt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SrtFiles\[Children] Despicable Me 2010.srt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SrtFiles\[Children] Minions 2015.srt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SrtFiles\[Children] Sing 2016.srt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SrtFiles\[Children] The Boss Baby 2017.srt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SrtFiles\[Children] The Grinch 2018.srt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SrtFiles\[Drama] 500 Days of Summer 2009.srt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SrtFiles\[Drama] Definitely Maybe 2008.srt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SrtFiles\[Drama] Hitch 2005.srt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SrtFiles\[Drama] La La Land 2016.srt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SrtFiles\[Drama] Me Before You 2016.srt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SrtFiles\[Horror] Annabelle 2017.srt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SrtFiles\[Horror] Ghost Ship 2002.srt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SrtFiles\[Horror] I Still See You 2018.srt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SrtFiles\[Horror] Rings 2017.srt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SrtFiles\[Horror] The Conjuring 2013.srt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SrtFiles\[SciFi] Aliens 1986.srt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SrtFiles\[SciFi] Back to the Future 1985.srt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SrtFiles\[SciFi] Interstellar 2014.srt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SrtFiles\[SciFi] Jurassic Park 1993.srt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SrtFiles\[SciFi] The Matrix 1999.srt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SrtFiles\[Teenagers] A Cinderella Story 2004.srt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SrtFiles\[Teenagers] High School Musical 2006.srt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SrtFiles\[Teenagers] Love Simon 2018.srt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SrtFiles\[Teenagers] Mean Girls 2004.srt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SrtFiles\[Teenagers] Raise Your Voice 2004.srt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SrtWordCount.Core\SrtWordCount.Core.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,40 @@
+﻿@page
+@model SrtWordCount.WebApp.Pages.Statistics.ListModel
+@{
+    ViewData["Title"] = "List";
+}
+
+<h2>Statistics</h2>
+
+<div class="mt-2 mb-2">
+    <form method="get" class="form-inline">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" asp-for="SearchTerm">
+        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+    </form>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Movie title</th>
+            <th scope="col">Genre</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.SrtStatisticsViewModelList)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.MovieTitle</td>
+                <td>@item.Genre</td>
+                <td>
+                    <partial name="_Buttons" model="item" />
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-page="./Edit" class="btn btn-success">Add new</a>
