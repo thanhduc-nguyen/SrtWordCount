@@ -2,12 +2,29 @@
 @model SrtWordCount.WebApp.Pages.SummaryModel
 @{
     ViewData["Title"] = "Summary";
+
+    var genreTitle = "";
 }
 
 <h2>Summary</h2>
 
-<h5 class="mt-3">Total distinct words</h5>
-@foreach (var item in Model.SrtStatisticsModels)
+<h5 class="mt-3 text-success">Total distinct words</h5>
+@foreach (var item in Model.SrtStatisticsViewModels)
 {
-    <div>@item.MovieTitle which is a @item.Genre movie has @item.TotalDistictWordCounts words.</div>
+    @if (genreTitle != item.Genre.ToString())
+    {
+        genreTitle = item.Genre.ToString();
+        <h6 class="mt-3 text-danger">@item.Genre</h6>
+    }
+    <div>@item.MovieTitle has @item.TotalDistictWordCounts words.</div>
+}
+
+<h5 class="mt-3 text-success">Top movies</h5>
+@if (Model.LeastWordSrt != null)
+{
+    <div>@Model.LeastWordSrt.MovieTitle has the least words used with @Model.LeastWordSrt.TotalDistictWordCounts.</div>
+}
+@if (Model.MostWordSrt != null)
+{
+    <div>@Model.MostWordSrt.MovieTitle has the most words used with @Model.MostWordSrt.TotalDistictWordCounts.</div>
 }

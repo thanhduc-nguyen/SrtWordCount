@@ -1,28 +1,37 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using SrtWordCount.Core;
 using SrtWordCount.Data;
 using SrtWordCount.Data.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SrtWordCount.WebApp.Pages
 {
     public class SummaryModel : PageModel
     {
-        private readonly ISrtWordCountService _srtWordCountService;
         private readonly ISrtStatisticsData _srtStatisticsData;
 
-        public IEnumerable<SrtStatisticsModel> SrtStatisticsModels { get; set; }
-        public List<KeyValuePair<MovieGenre, int>> TotalWordsGroupByGenre { get; set; }
+        public IEnumerable<SrtStatisticsViewModel> SrtStatisticsViewModels { get; set; }
+        public SrtStatisticsViewModel LeastWordSrt { get; set; }
+        public SrtStatisticsViewModel MostWordSrt { get; set; }
 
-        public SummaryModel(ISrtWordCountService srtWordCountService, ISrtStatisticsData srtStatisticsData)
+        public SummaryModel(ISrtStatisticsData srtStatisticsData)
         {
-            _srtWordCountService = srtWordCountService;
             _srtStatisticsData = srtStatisticsData;
         }
 
         public void OnGet()
         {
-            SrtStatisticsModels = _srtStatisticsData.GetAllSrtStatisticsByName();
+            SrtStatisticsViewModels = _srtStatisticsData.GetAllSrtStatisticsByName()
+                .Select(x => x.ConvertToSrtStatisticsViewModel());
+
+            if (SrtStatisticsViewModels.Any())
+            {
+                int min = SrtStatisticsViewModels.Min(x => x.TotalDistictWordCounts);
+                LeastWordSrt = SrtStatisticsViewModels.Where(x => x.TotalDistictWordCounts == min).SingleOrDefault();
+
+                int max = SrtStatisticsViewModels.Max(x => x.TotalDistictWordCounts);
+                MostWordSrt = SrtStatisticsViewModels.Where(x => x.TotalDistictWordCounts == max).SingleOrDefault();
+            }
         }
     }
 }
