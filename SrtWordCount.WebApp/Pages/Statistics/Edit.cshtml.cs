@@ -48,7 +48,7 @@ namespace SrtWordCount.WebApp.Pages.Statistics
             {
                 MovieGenres = _htmlHelper.GetEnumSelectList<MovieGenre>();
                 return Page();
-            }           
+            }
 
             if (SrtStatisticsModel.Id > 0)
             {

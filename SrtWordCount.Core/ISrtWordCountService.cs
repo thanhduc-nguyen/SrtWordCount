@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace SrtWordCount.Core
+﻿namespace SrtWordCount.Core
 {
     public interface ISrtWordCountService
     {

@@ -75,7 +75,7 @@ namespace SrtWordCount.WebApp.Api
             }
 
             _db.Entry(model).State = EntityState.Modified;
-            
+
             try
             {
                 await _db.SaveChangesAsync();
@@ -105,7 +105,7 @@ namespace SrtWordCount.WebApp.Api
             }
 
             var srtStatistics = await _db.SrtStatisticsModelList.FindAsync(id);
-            
+
             if (srtStatistics == null)
             {
                 return NotFound();

@@ -1,5 +1,4 @@
-﻿using SrtWordCount.Core;
-using SrtWordCount.Data.Models;
+﻿using SrtWordCount.Data.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
