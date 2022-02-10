@@ -22,12 +22,11 @@ namespace SrtWordCount.WebApp
             _webHostingEnvironment = webHostEnvironment;
         }
 
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             var dbPath = Path.Combine(_webHostingEnvironment.ContentRootPath, "App_Data\\SrtWordCount.mdf");
-            var connectionString = $"Data Source=(localdb)\\MSSQLLocalDB;AttachDbFilename={dbPath};Initial Catalog=SrtWordCount;Integrated Security=True;";
+            var connectionString = string.Format(_configuration.GetConnectionString("DefaultConnection"), dbPath);
             services.AddDbContextPool<SrtWordCountDbContext>(options =>
             {
                 options.UseSqlServer(connectionString);
